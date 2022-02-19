@@ -4,5 +4,6 @@
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Log In</button>
+    <a href="{% url 'signup' %}"><h3>Sign up</h3></a>
 </form>
 {% endblock content %}
