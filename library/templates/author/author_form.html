@@ -1,0 +1,14 @@
+{% extends "base.html" %} &nbsp;{% block content %}
+<h1>Add a new author</h1>
+<form action="" method="post" autocomplete="off">
+
+    {% csrf_token %}
+
+    {{ form.name }}
+    {{ form.surname }}
+    {{ form.patronymic }}
+
+    <button value="Submit">Submit</button>
+
+</form>
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %} &nbsp;{% block content %}
+<h1>Authors</h1>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Patronymic</th>
+    </tr>
+    {% for author in authors %}
+    <tr>
+        <td>{{ author.name }}</td>
+        <td>{{ author.surname }}</td>
+        <td>{{ author.patronymic }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}
