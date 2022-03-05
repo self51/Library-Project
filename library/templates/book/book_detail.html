@@ -1,0 +1,15 @@
+{% extends "base.html" %} &nbsp;{% block content %}
+
+{% csrf_token %}
+
+
+<h2>Book details</h2>
+<h3>{{ book.name }}</h3>
+
+<p>{{ book.author }}</p>
+<p>{{ book.description }}</p>
+<p>{{ book.count }}</p>
+
+<button><a href="/book/delete/{{ book.id }}">Delete</a></button>
+
+{% endblock content %}
