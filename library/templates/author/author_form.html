@@ -1,12 +1,17 @@
 {% extends "base.html" %} &nbsp;{% block content %}
+
 <h1>Add a new author</h1>
+
+{% load crispy_forms_tags %}
+
 <form action="" method="post" autocomplete="off">
 
     {% csrf_token %}
 
-    {{ form.name }}
-    {{ form.surname }}
-    {{ form.patronymic }}
+    <!-- {{ form|crispy }} -->
+    {{ form.name|as_crispy_field }}
+    {{ form.surname|as_crispy_field }}
+    {{ form.patronymic|as_crispy_field }}
 
     <button value="Submit">Submit</button>
 
