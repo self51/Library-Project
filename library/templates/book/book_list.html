@@ -1,0 +1,21 @@
+{% extends "base.html" %} &nbsp;{% block content %}
+<h1>Book</h1>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Count</th>
+        <th>Author</th>
+    </tr>
+    {% for book in books %}
+    <tr>
+        <td>{{ book.name }}</td>
+        <td>{{ book.description }}</td>
+        <td>{{ book.count }}</td>
+        {% for author in book.authors.all %}
+        <td>{{ author.name }} {{ author.surname }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

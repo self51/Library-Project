@@ -1,0 +1,18 @@
+{% extends "base.html" %} &nbsp;{% block content %}
+
+{% load crispy_forms_tags %}
+
+<form action="" method="post" autocomplete="off">
+
+    {% csrf_token %}
+    <!-- {{ form|crispy }} -->
+    {{ form.name|as_crispy_field  }}
+    {{ form.author|as_crispy_field  }}
+    {{ form.description|as_crispy_field  }}
+    {{ form.count|as_crispy_field  }}
+
+    <button value="Submit">Submit</button>
+
+</form>
+
+{% endblock content %}
