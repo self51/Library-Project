@@ -33,4 +33,6 @@ def book_form(request, pk=None):
 
 
 def book_delete(request, pk):
-    pass
+    book = Book.objects.get(id=pk)
+    book.delete()
+    return redirect('/book/')
