@@ -12,7 +12,7 @@
         <td>{{ book.name }}</td>
         <td>{{ book.description }}</td>
         <td>{{ book.count }}</td>
-        {% for author in book.authors.all %}
+        {% for author in book.author.all %}
         <td>{{ author.name }} {{ author.surname }}</td>
         {% endfor %}
     </tr>
