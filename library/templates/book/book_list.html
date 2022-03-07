@@ -1,5 +1,22 @@
 {% extends "base.html" %} &nbsp;{% block content %}
-<h1>Book</h1>
+
+<form method="GET" id="searchform">
+    <lable for="searchbox">Search by author, part of name, etc:</lable>
+    <input id="searchbox" name="q" type="text" value="{{ request.GET.q }}" placeholder="Search...">
+</form>
+
+<form method="GET" id="sortform">
+    <lable for="choices_list" >Sort books by:</lable>
+    <input list="choices" name="sort_by" id="choices_list">
+    <datalist>
+        <option value="name(descending)">From A to Z (default)</option>
+        <option value="name(ascending)">From Z to A</option>
+        <option value="count(ascending)">From min to max</option>
+        <option value="count(descending)">From max to min</option>
+    </datalist>
+</form>
+
+<h1>Books</h1>
 <table>
     <tr>
         <th>Name</th>

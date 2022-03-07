@@ -9,6 +9,27 @@ class BookListView(ListView):
     context_object_name = 'books'
     model = Book
 
+    def get_queryset(self, *args, **kwargs):
+        query = self.request.GET.get('q')
+        sort_option = self.request.GET.get('sort_by')
+
+        if query:
+            return Book.objects.filter(Q(name__icontains=query)|
+                                      Q(author__name__icontains=query)|
+                                      Q(author__surname__icontains=query)).distinct()
+
+        elif sort_option:
+            if sort_option == 'name(descending)':
+                return Book.objects.order_by('-name')
+            if sort_option == 'name(ascending)':
+                return Book.objects.order_by('name')
+            if sort_option == 'count(ascending)':
+                return Book.objects.order_by('count')
+            if sort_option == 'count(descending)':
+                return Book.objects.order_by('-count')
+
+        return Book.objects.order_by('name').prefetch_related('author')
+
 class BookDetailView(DetailView):
     queryset = Book.objects.all()
     context_object_name = 'book'

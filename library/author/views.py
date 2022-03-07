@@ -9,6 +9,27 @@ class AuthorListView(ListView):
     context_object_name = 'authors'
     model = Author
 
+    def get_queryset(self, *args, **kwargs):
+        query = self.request.GET.get('q')
+        sort_option = self.request.GET.get('sort_by')
+
+        if query:
+            return Author.objects.filter(Q(name__icontains=query)|
+                                      Q(surname__icontains=query)|
+                                      Q(patronymic__icontains=query)).distinct()
+
+        elif sort_option:
+            if sort_option == 'name(descending)':
+                return Author.objects.order_by('-name')
+            if sort_option == 'name(ascending)':
+                return Author.objects.order_by('name')
+            if sort_option == 'surname(ascending)':
+                return Author.objects.order_by('surname')
+            if sort_option == 'surname(descending)':
+                return Author.objects.order_by('-surname')
+
+        return Author.objects.order_by('name')
+
 def author_form(request, pk=None):
     if request.method == 'GET':
         if pk == None:
