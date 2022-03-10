@@ -7,3 +7,6 @@ class Book(models.Model):
     description = models.TextField(blank=True)
     count = models.IntegerField(default=10)
     author = models.ManyToManyField(Author, related_name='books')
+
+    def __str__(self):
+        return self.name
