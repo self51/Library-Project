@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'authentication',
     'author',
     'book',
+    'order',
 ]
 
 MIDDLEWARE = [
