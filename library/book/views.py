@@ -39,14 +39,14 @@ def book_form(request, pk=None):
         if pk == None:
             form = BookForm()
         else:
-            book = Book.objects.get(pk)
+            book = Book.objects.get(id=pk)
             form = BookForm(instance=book)
         return render(request, 'book/book_form.html', {'form': form})
     else:
         if pk == None:
             form = BookForm(request.POST)
         else:
-            book = Book.objects.get(pk)
+            book = Book.objects.get(id=pk)
             form = BookForm(request.POST, instance=book)
         if form.is_valid():
             form.save()
