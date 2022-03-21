@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
+    'crispy_tailwind',
     'authentication',
     'author',
     'book',
@@ -132,3 +133,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),]
 
 LOGIN_REDIRECT_URL = 'account'
 LOGOUT_REDIRECT_URL = 'login'
+
+CRISPY_ALlOWED_TEMPLATE_PACKS = 'tailwind'
+CRISPY_TEMPLATE_PACK = 'tailwind'
