@@ -1,9 +1,8 @@
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.views import generic
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-from django.contrib.auth import update_session_auth_hash
+
 
 class SignUpView(generic.CreateView):
     form_class = UserCreationForm
