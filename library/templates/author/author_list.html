@@ -1,34 +1,68 @@
-{% extends "base.html" %} &nbsp;{% block content %}
+{% extends "base.html" %}
 
-<form method="GET" id="searchform">
-    <lable for="searchbox">Search by name, surname, patronymic, part of name, etc:</lable>
-    <input id="searchbox" name="q" type="text" value="{{ request.GET.q }}" placeholder="Search...">
-</form>
 
-<form method="GET" id="sortform">
-    <lable for="choices_list" >Sort authors by:</lable>
-    <input list="choices" name="sort_by" id="choices_list">
-    <datalist>
-        <option value="name(descending)">From A to Z (default)</option>
-        <option value="name(ascending)">From Z to A</option>
-        <option value="surname(ascending)">From A to Z</option>
-        <option value="surname(descending)">From Z to A</option>
-    </datalist>
-</form>
+{% block content %}
 
-<h1>Authors</h1>
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Surname</th>
-        <th>Patronymic</th>
-    </tr>
-    {% for author in authors %}
-    <tr>
-        <td>{{ author.name }}</td>
-        <td>{{ author.surname }}</td>
-        <td>{{ author.patronymic }}</td>
-    </tr>
-    {% endfor %}
-</table>
+<header>
+    <style>
+        body {
+            background-color: #F8F9FA;
+        }
+    </style>
+</header>
+
+<div class="album py-4 bg-light">
+    <div class="container">
+          <div class="row">
+                <div class="col-8">
+                    <form class="d-flex" method="GET" id="searchform">
+                        <input class="form-control me-2" id="searchbox" name="q" type="text" value="{{ request.GET.q }}" placeholder="Search author, by part of name, etc" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col">
+                            <form method="GET" id="sortform">
+                                <input list="choices" name="sort_by" id="choices_list" class="form-control" placeholder="Sort author by:">
+                                <datalist class="" id="choices">
+                                    <option value="name(descending)">From A to Z (default)</option>
+                                    <option value="name(ascending)">From Z to A</option>
+                                    <option value="count(ascending)">From min to max</option>
+                                    <option value="count(descending)">From max to min</option>
+                                </datalist>
+                            </form>
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-info" href="/author/add" role="button">Add author</a>
+                        </div>
+                    </div>
+                </div>
+          </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="album py-4 bg-light">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            {% for author in authors %}
+                <div class="card" style="width: 20rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ author.name }} {{ author.surname }} {{ author.patronymic }}</h5>
+                        <a href="#" class="card-link">Author's books </a>
+                        <a href="/author/update/{{ author.id }}" class="card-link">Edit</a>
+                        <a href="/author/delete/{{ author.id }}" class="card-link">Delete</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
 {% endblock content %}

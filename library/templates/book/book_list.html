@@ -1,43 +1,75 @@
-{% extends "base.html" %} &nbsp;{% block content %}
+{% extends "base.html" %}
 
-<form method="GET" id="searchform">
-    <lable for="searchbox">Search by author, part of name, etc:</lable>
-    <input id="searchbox" name="q" type="text" value="{{ request.GET.q }}" placeholder="Search...">
-</form>
 
-<form method="GET" id="sortform">
-    <lable for="choices_list" >Sort books by:</lable>
-    <input list="choices" name="sort_by" id="choices_list">
-    <datalist id="choices">
-        <option value="name(descending)">From A to Z (default)</option>
-        <option value="name(ascending)">From Z to A</option>
-        <option value="count(ascending)">From min to max</option>
-        <option value="count(descending)">From max to min</option>
-    </datalist>
-</form>
+{% block content %}
 
-<h1>Books</h1>
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Count</th>
-        <th>Author</th>
-    </tr>
-    {% for book in books %}
-    <tr>
-        <td>{{ book.name }}</td>
-        <td>{{ book.description }}</td>
-        <td>{{ book.count }}</td>
-        {% for author in book.author.all %}
-        <td>{{ author.name }} {{ author.surname }}</td>
-        {% endfor %}
-    </tr>
-    {% endfor %}
-</table>
+<header>
+    <style>
+        body {
+            background-color: #F8F9FA;
+        }
+    </style>
+</header>
+
+<div class="album py-4 bg-light">
+    <div class="container">
+          <div class="row">
+                <div class="col-8">
+                    <form class="d-flex" method="GET" id="searchform">
+                        <input class="form-control me-2" id="searchbox" name="q" type="text" value="{{ request.GET.q }}" placeholder="Search book, by author, part of name, etc" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col">
+                            <form method="GET" id="sortform">
+                                <input list="choices" name="sort_by" id="choices_list" class="form-control" placeholder="Sort books by:">
+                                <datalist class="" id="choices">
+                                    <option value="name(descending)">From A to Z (default)</option>
+                                    <option value="name(ascending)">From Z to A</option>
+                                    <option value="count(ascending)">From min to max</option>
+                                    <option value="count(descending)">From max to min</option>
+                                </datalist>
+                            </form>
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-info" href="/book/add" role="button">Add book</a>
+                        </div>
+                    </div>
+                </div>
+          </div>
+    </div>
+</div>
+
+
+<div class="album py-1 bg-light">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            {% for book in books %}
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm" style="height: 33rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ book.name }}</h5>
+                            {% for author in book.author.all %}
+                            <h6 class="card-title">{{ author.name }} {{ author.surname }}</h6>
+                            {% endfor %}
+                            <p class="card-text">{{ book.description }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <form action="." method="post"><a class="btn btn-sm btn-outline-secondary" href="/order/add/{{ book.id }}" role="button" type="submit">Order</a></form>
+                                    <a class="btn btn-sm btn-outline-secondary" href="{{ book.id }}" role="button">View</a>
+                                    <a class="btn btn-sm btn-outline-secondary" href="update/{{ book.id }}" role="button">Edit</a>
+                                    <a class="btn btn-sm btn-outline-secondary" href="delete/{{ book.id }}" role="button">Delete</a>
+                                </div>
+                                <small class="text-muted">{{ book.count }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
 {% endblock content %}
-
-<!--            <form class="d-flex" method="GET" id="searchform">-->
-<!--                <input class="form-control me-2" id="searchbox" name="q" type="text" value="{{ request.GET.q }}" placeholder="Search" aria-label="Search">-->
-<!--                <button class="btn btn-outline-success" type="submit">Search</button>-->
-<!--            </form>-->
