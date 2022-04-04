@@ -1,18 +1,34 @@
-{% extends "base.html" %} &nbsp;{% block content %}
+{% extends "base.html" %}
+{% load widget_tweaks %}
 
-{% load crispy_forms_tags %}
 
-<form action="" method="post" autocomplete="off">
+{% block content %}
 
-    {% csrf_token %}
-    <!-- {{ form|crispy }} -->
-    {{ form.name|as_crispy_field  }}
-    {{ form.author|as_crispy_field  }}
-    {{ form.description|as_crispy_field  }}
-    {{ form.count|as_crispy_field  }}
 
-    <button value="Submit">Submit</button>
+<div class="container card-0 justify-content-center" style="margin: 2% auto;">
+    <div class="card-body px-sm-4 px-0">
+        <div class="row justify-content-center round">
+            <div class="col-lg-10 col-md-12 ">
+                <div class="card shadow-lg card-1">
+                    <div class="card-body inner-card" style="background-color: #F8F9FA;">
+                        <h3 class="font-weight-bold ml-md-0 mx-auto text-center text-sm-left"> Add a new book </h3>
+                        <form action="" method="post">
 
-</form>
+                            {% csrf_token %}
+
+                            <div class="album py-4 bg-light">{% render_field form.name type="text" class="form-control" placeholder="Name book" %}</div>
+                            <div class="album py-4 bg-light">{% render_field form.author type="text" class="form-control" %}</div>
+                            <div class="album py-4 bg-light">{% render_field form.description class="form-control" placeholder="Description" %}</div>
+                            <div class="album py-4 bg-light">{% render_field form.count class="form-control" placeholder="Count" %}</div>
+
+                            <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Submit</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}

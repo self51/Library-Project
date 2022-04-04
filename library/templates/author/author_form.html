@@ -1,19 +1,31 @@
-{% extends "base.html" %} &nbsp;{% block content %}
+{% extends "base.html" %}
+{% load widget_tweaks %}
 
-<h1>Add a new author</h1>
 
-{% load crispy_forms_tags %}
+{% block content %}
 
-<form action="" method="post" autocomplete="off">
+<div class="container card-0 justify-content-center" style="margin-top: 10%">
+    <div class="card-body px-sm-4 px-0">
+        <div class="row justify-content-center round">
+            <div class="col-lg-10 col-md-12 ">
+                <div class="card shadow-lg card-1">
+                    <div class="card-body inner-card" style="background-color: #F8F9FA;">
+                        <h3 class="font-weight-bold ml-md-0 mx-auto text-center text-sm-left"> Add a new author </h3>
+                        <form action="" method="post">
 
-    {% csrf_token %}
+                            {% csrf_token %}
+                            <div class="album py-2 bg-light">{% render_field form.name type="text" class="form-control" placeholder="Name" %}</div>
+                            <div class="album py-2 bg-light">{% render_field form.surname type="text" class="form-control" placeholder="Surname" %}</div>
+                            <div class="album py-2 bg-light">{% render_field form.patronymic type="text" class="form-control" placeholder="Patronymic" %}</div>
 
-    <!-- {{ form|crispy }} -->
-    {{ form.name|as_crispy_field }}
-    {{ form.surname|as_crispy_field }}
-    {{ form.patronymic|as_crispy_field }}
+                            <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Submit</button>
 
-    <button value="Submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-</form>
 {% endblock content %}
