@@ -1,12 +1,17 @@
-{% extends "base.html" %} &nbsp;{% block content %}
+{% extends "base.html" %}
 
-<h1>Orders</h1>
-<table>
+
+{% block content %}
+
+<table class="table">
+    <thead>
     <tr>
-        <th>User</th>
-        <th>Book</th>
-        <th>Created_at</th>
+        <th scope="col">User</th>
+        <th scope="col">Book</th>
+        <th scope="col">Created_at</th>
     </tr>
+    </thead>
+    <tbody>
     {% for order in orders %}
     <tr>
         <td>{{ order.user }}</td>
@@ -14,5 +19,7 @@
         <td>{{ order.created_at }}</td>
     </tr>
     {% endfor %}
+    </tbody>
 </table>
+
 {% endblock content %}
