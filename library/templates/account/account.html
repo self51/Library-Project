@@ -1,3 +1,73 @@
-{% extends "base.html" %} &nbsp;{% block content %}
-<h1>Account</h1>
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="main-body">
+
+        <div class="row gutters-sm" style="margin-top: 5%">
+
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <div class="mt-3">
+                                <h4>{{ user.username }}</h4>
+                                <p class="text-secondary mb-1">Last login - {{ user.last_login }}</p>
+                                <p class="text-muted font-size-sm">Date joined - {{ user.date_joined }}</p>
+                                <a class="btn btn-primary" href="/order/myorders/{{ user.id }}">My orders</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">First name</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">{{ user.first_name }}</div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Last name</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">{{ user.last_name }}</div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Email</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">{{ user.email }}</div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Password</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">**********</div>
+                        </div>
+                        <hr>
+
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a class="btn btn-info " target="__blank" href="/accounts/edit/{{ user.id }}">Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
 {% endblock content %}
