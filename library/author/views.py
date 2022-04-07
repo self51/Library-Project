@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
 from .models import Author
+from book.models import Book
 from .forms import AuthorForm
 from django.db.models import Q
 
@@ -29,6 +30,12 @@ class AuthorListView(ListView):
                 return Author.objects.order_by('-surname')
 
         return Author.objects.order_by('name')
+
+
+def author_books(request, pk):
+    author = Author.objects.get(id=pk)
+    books = Book.objects.filter(author=author)
+    return render(request, 'book/book_list.html', {'books': books})
 
 def author_form(request, pk=None):
     if request.method == 'GET':
