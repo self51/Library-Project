@@ -6,4 +6,4 @@ class Author(models.Model):
     patronymic = models.CharField(blank=True, max_length=20)
 
     def __str__(self):
-        return self.patronymic
+        return str(self.name + ' ' + self.surname + ' ' + self.patronymic)
