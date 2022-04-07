@@ -24,6 +24,9 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="/author">Authors</a>
                 </li>
+                {% if user.is_superuser %}
+                <li class="nav-item"><a class="nav-link active" href="/order/">Orders</a></li>
+                {% endif %}
             </ul>
             <div class="btn-group">
                 <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -40,20 +43,20 @@
                     {% endif %}
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="{% url 'account' %}">Account</a></li>
-                    <li><a class="dropdown-item" href="#">My orders</a></li>
-
+                    <li><a class="dropdown-item" href="/order/myorders/{{ user.id }}">My orders</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <footer class="footer">
-      <div class="container">
-        <span class="text-muted">Created by Self</span>
-      </div>
-    </footer>
 
     {% block content %}
     {% endblock content %}
+
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">Created by Self</span>
+        </div>
+    </footer>
 
 </body>
 </html>
