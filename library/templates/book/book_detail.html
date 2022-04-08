@@ -1,15 +1,39 @@
-{% extends "base.html" %} &nbsp;{% block content %}
+{% extends "base.html" %}
+
+
+{% block content %}
 
 {% csrf_token %}
 
-
-<h2>Book details</h2>
-<h3>{{ book.name }}</h3>
-
-<p>{{ book.author }}</p>
-<p>{{ book.description }}</p>
-<p>{{ book.count }}</p>
-
-<button><a href="/book/delete/{{ book.id }}">Delete</a></button>
+<div style="display: flex; justify-content: center; margin:10%">
+    <div class="card border-light mb-3" style="width: 40rem;">
+        <div class="card-header">
+            <h4 class="fs-1 ms-1 mt-3">{{ book.name }}</h4>
+            {% for author in book.author.all %}
+                <small class="text-muted">{{ author.name }} {{ author.surname }}</small>
+            {% endfor %}
+        </div>
+        <div class="card-body">
+            <div class="card-text">{{ book.description }}</div>
+        </div>
+        <div class="card-footer">
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group me-2" role="group">
+                    <form action="." method="post"><a class="btn btn-outline-primary" href="/order/add/{{ book.id }}" role="button" type="submit">Order</a></form>
+                </div>
+                <div class="btn-group me-2" role="group">
+                    {% if user.is_superuser %}
+                        <a class="btn btn-outline-secondary" href="/book/delete/{{ book.id }}" role="button">Delete</a>
+                    {% endif %}
+                </div>
+                <div class="btn-group me-2" role="group">
+                    {% if user.is_superuser %}
+                        <a class="btn btn-outline-secondary" href="/book/update/{{ book.id }}" role="button">Edit</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}
