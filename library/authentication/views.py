@@ -1,9 +1,10 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.models import User
-from .forms import UserForm
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
+from .forms import UserForm
 
 
 class SignUpView(generic.CreateView):
@@ -26,3 +27,14 @@ def edit_user(request, pk):
         if form.is_valid():
             form.save()
         return redirect('account')
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            return redirect('account')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'account/change_password.html', {'form': form})
