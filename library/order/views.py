@@ -17,14 +17,16 @@ def user_orders(request, pk):
     return render(request, 'order/user_orders.html', {'orders': orders})
 
 def order_form(request, pk=None):
-    book = Book.objects.get(id=pk)
-    form = OrderForm(request.POST)
-    if form.is_valid():
-        order = form.save(commit=False)
-        order.user = request.user
-        order.book = book
-        form.save()
-    return redirect('/order/')
+    if request.user.is_authenticated:
+        book = Book.objects.get(id=pk)
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            order = form.save(commit=False)
+            order.user = request.user
+            order.book = book
+            form.save()
+        return redirect('/order/')
+    return redirect('login')
 
 def order_delete(request, pk):
     order = Order.objects.get(id=pk)
