@@ -36,14 +36,17 @@
                     {% if user.is_authenticated %}
                         <li><h6 class="dropdown-header">Hi {{ user.username }}!</h6></li>
                         <li class="dropdown-item"><a class="btn btn-primary" href="{% url 'logout' %}" role="button">Log out</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{% url 'account' %}">Account</a></li>
+                        <li><a class="dropdown-item" href="/order/myorders/{{ user.id }}">My orders</a></li>
                     {% else %}
                         <li><h5 class="dropdown-header">Welcome to Library!</h5></li>
                         <li class="dropdown-item"><a class="btn btn-primary" href="{% url 'login' %}" role="button">log in</a></li>
                         <li class="dropdown-item"><a class="btn btn-primary" href="{% url 'signup' %}" role="button">Sign up</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item disabled" href="{% url 'account' %}">Account</a></li>
+                        <li><a class="dropdown-item disabled" href="/order/myorders/{{ user.id }}">My orders</a></li>
                     {% endif %}
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="{% url 'account' %}">Account</a></li>
-                    <li><a class="dropdown-item" href="/order/myorders/{{ user.id }}">My orders</a></li>
                 </ul>
             </div>
         </div>

@@ -34,9 +34,14 @@
                                 </datalist>
                             </form>
                         </div>
-                        <div class="col">
-                            <a class="btn btn-info" href="/author/add" role="button">Add author</a>
-                        </div>
+                        {% if user.is_superuser %}
+                            <div class="col">
+                                <a class="btn btn-info" href="/author/add" role="button">Add author</a>
+                            </div>
+                        {% endif %}
+                            <div class="col">
+                                <a class="btn btn-info disabled" href="/author/add" role="button">Add author</a>
+                            </div>
                     </div>
                 </div>
           </div>
@@ -50,10 +55,14 @@
             {% for author in authors %}
                 <div class="card" style="width: 20rem;">
                     <div class="card-body">
-                        <h5 class="card-title">{{ author.name }} {{ author.surname }} {{ author.patronymic }}</h5>
-                        <a href="{{ author.id }}/books" class="card-link">Author's books </a>
-                        <a href="/author/update/{{ author.id }}" class="card-link">Edit</a>
-                        <a href="/author/delete/{{ author.id }}" class="card-link">Delete</a>
+                        {% if user.is_superuser %}
+                            <h5 class="card-title">{{ author.name }} {{ author.surname }} {{ author.patronymic }}</h5>
+                            <a href="{{ author.id }}/books" class="card-link">Author's books </a>
+                            <a href="/author/update/{{ author.id }}" class="card-link">Edit</a>
+                            <a href="/author/delete/{{ author.id }}" class="card-link">Delete</a>
+                        {% endif %}
+                            <h5 class="card-title">{{ author.name }} {{ author.surname }} {{ author.patronymic }}</h5>
+                            <a href="{{ author.id }}/books" class="card-link">Author's books </a>
                     </div>
                 </div>
             {% endfor %}
