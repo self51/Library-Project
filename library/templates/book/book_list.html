@@ -37,10 +37,11 @@
                             <div class="col">
                                 <a class="btn btn-info" href="/book/add" role="button">Add book</a>
                             </div>
-                        {% endif %}
+                        {% else %}
                             <div class="col">
                                 <a class="btn btn-info disabled" href="/book/add" role="button">Add book</a>
                             </div>
+                        {% endif %}
                     </div>
                 </div>
           </div>
@@ -69,11 +70,12 @@
                                         <a class="btn btn-sm btn-outline-secondary" href="{{ book.id }}" role="button">View</a>
                                         <a class="btn btn-sm btn-outline-secondary" href="update/{{ book.id }}" role="button">Edit</a>
                                         <a class="btn btn-sm btn-outline-secondary" href="delete/{{ book.id }}" role="button">Delete</a>
-                                    {% endif %}
+                                    {% else %}
                                         <form action="." method="post"><a class="btn btn-sm btn-outline-secondary" href="/order/add/{{ book.id }}" role="button" type="submit">Order</a></form>
                                         <a class="btn btn-sm btn-outline-secondary" href="{{ book.id }}" role="button">View</a>
                                         <a class="btn btn-sm btn-outline-secondary disabled" href="update/{{ book.id }}" role="button">Edit</a>
                                         <a class="btn btn-sm btn-outline-secondary disabled" href="delete/{{ book.id }}" role="button">Delete</a>
+                                    {% endif %}
                                 </div>
                                 <small class="text-muted">{{ book.count }}</small>
                             </div>

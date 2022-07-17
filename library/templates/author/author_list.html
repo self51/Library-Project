@@ -38,10 +38,11 @@
                             <div class="col">
                                 <a class="btn btn-info" href="/author/add" role="button">Add author</a>
                             </div>
-                        {% endif %}
+                        {% else %}
                             <div class="col">
                                 <a class="btn btn-info disabled" href="/author/add" role="button">Add author</a>
                             </div>
+                        {% endif %}
                     </div>
                 </div>
           </div>
@@ -60,9 +61,10 @@
                             <a href="{{ author.id }}/books" class="card-link">Author's books </a>
                             <a href="/author/update/{{ author.id }}" class="card-link">Edit</a>
                             <a href="/author/delete/{{ author.id }}" class="card-link">Delete</a>
-                        {% endif %}
+                        {% else %}
                             <h5 class="card-title">{{ author.name }} {{ author.surname }} {{ author.patronymic }}</h5>
                             <a href="{{ author.id }}/books" class="card-link">Author's books </a>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
