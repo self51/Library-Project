@@ -16,13 +16,19 @@ This is a pet-project, it should not be used for commercial purposes!
 
 ##### Getting Started
 * Create database 'LibraryProject' in PostgreSQL.
+* Update database settings in settings.py, if necessary.
 * `$ pip install -r requirements.txt`
 * `$ python manage.py makemigrations`
 * `$ python manage.py migrate`
 * `$ python manage.py runserver`
 
 ##### Testing application for administrators
-* Login: `admin1`
-* Password: `password12q!`
+* `$ python manage.py createsuperuser`
+* Enter your desired username, email, password.
+* `Username: admin`
+* `Email address: admin@example.com`
+* `Password: password12Q`
+* `Password (again): password12Q`
+* `Superuser created successfully.`
 
 Made by `Self`.
