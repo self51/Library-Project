@@ -26,7 +26,7 @@ SECRET_KEY = '7#gl*z+2g25$5j-!9c2z560x6oelxp^(vmtp8xj25h=!2ziihj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
 
 
 # Application definition
@@ -79,6 +79,7 @@ WSGI_APPLICATION = 'library.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# database for test
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -89,6 +90,17 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+# database for docker-compose
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',
+#         'USER': 'postgres',
+#         'HOST': 'db',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation

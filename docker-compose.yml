@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  db:
+    image: postgres:10.1-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  web:
+    container_name: library_project
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    command:  bash -c "python ./library/manage.py migrate --noinput &&
+              python ./library/manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+volumes:
+  postgres_data:
