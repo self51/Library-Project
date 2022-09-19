@@ -32,9 +32,9 @@ class TestViews(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.author_list = reverse('author_list')
-        self.author_books = reverse('author_books', args=[1])
-        self.author_add = reverse('author_form')
+        self.author_list_url = reverse('author_list')
+        self.author_books_url = reverse('author_books', args=[1])
+        self.author_add_url = reverse('author_form')
         self.author = Author.objects.create(
             name="Person",
             surname="Person_surname",
@@ -42,19 +42,19 @@ class TestViews(TestCase):
         )
 
     def test_author_list_view(self):
-        response = self.client.get(self.author_list)
+        response = self.client.get(self.author_list_url)
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'author/author_list.html')
 
     def test_author_books(self):
-        response = self.client.get(self.author_books)
+        response = self.client.get(self.author_books_url)
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'book/book_list.html')
 
     def test_author_form_get(self):
-        response_add = self.client.get(self.author_add)
+        response_add = self.client.get(self.author_add_url)
         response_update = self.client.get(reverse('author_update', args=[3]))
 
         self.assertEqual(response_add.status_code, 200)
@@ -63,7 +63,7 @@ class TestViews(TestCase):
         self.assertTemplateUsed(response_update, 'author/author_form.html')
 
     def test_author_form_post(self):
-        response_add = self.client.post(self.author_add, {
+        response_add = self.client.post(self.author_add_url, {
             'name': 'Person1',
             'surname': "Person_surname",
             'patronymic': "Person_patronymic"
