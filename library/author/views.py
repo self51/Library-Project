@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
-from .models import Author
-from book.models import Book
-from .forms import AuthorForm
 from django.db.models import Q
+from django.core.cache import cache
+
+from .models import Author
+from .forms import AuthorForm
+from book.models import Book
 
 
 class AuthorListView(ListView):
@@ -33,8 +35,12 @@ class AuthorListView(ListView):
 
 
 def author_books(request, pk):
-    author = Author.objects.get(id=pk)
-    books = Book.objects.filter(author=author)
+    books = cache.get('books')
+    if not books:
+        author = Author.objects.get(id=pk)
+        books = Book.objects.filter(author=author)
+        cache.set('books', books, 60)
+
     return render(request, 'book/book_list.html', {'books': books})
 
 def author_form(request, pk=None):
