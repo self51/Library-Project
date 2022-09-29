@@ -25,4 +25,5 @@ urlpatterns = [
     path('author/', include('author.urls')),
     path('book/', include('book.urls')),
     path('order/', include('order.urls')),
+    path('__debug__/', include('debug_toolbar.urls')),
 ]
