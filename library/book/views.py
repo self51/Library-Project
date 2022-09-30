@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
+from django.db.models import Q
+
 from .models import Book, Author
 from .forms import BookForm
-from django.db.models import Q
 
 
 class BookListView(ListView):
@@ -30,9 +31,11 @@ class BookListView(ListView):
 
         return Book.objects.order_by('name').prefetch_related('author')
 
+
 class BookDetailView(DetailView):
     queryset = Book.objects.all()
     context_object_name = 'book'
+
 
 def book_form(request, pk=None):
     if request.method == 'GET':
