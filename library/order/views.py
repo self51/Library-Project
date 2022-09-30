@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.core.cache import cache
 
 from .models import Order
 from book.models import Book
@@ -14,8 +15,12 @@ class OrderListView(ListView):
 
 
 def user_orders(request, pk):
-    user = User.objects.get(id=pk)
-    orders = Order.objects.filter(user=user)
+    orders = cache.get('orders')
+    if not orders:
+        user = User.objects.get(id=pk)
+        orders = Order.objects.filter(user=user)
+        cache.set('orders', orders, 60)
+
     return render(request, 'order/user_orders.html', {'orders': orders})
 
 
