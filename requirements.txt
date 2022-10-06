@@ -4,4 +4,6 @@ psycopg2==2.8.6
 asgiref==3.3.2
 django-widget-tweaks==1.4.12
 django-redis==5.2.0
+redis==4.3.4
 django-debug-toolbar==3.7.0
+django-environ==0.9.0
