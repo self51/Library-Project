@@ -5,18 +5,19 @@ This is a pet-project, it should not be used for commercial purposes!
 <br/>A project that allows you to create a book account for the user and rent books.
 
 ##### Software that you need
-* Python 3.8.
-* Django 3.2.
+* Python 3.8;
+* Django 3.2;
 * PostgreSQL.
 
 ##### Technology stack:
-* HTML, CSS, Bootstrap;
 * Python 3.8, Django 3.2;
-* PostgreSQL.
+* PostgreSQL;
+* HTML, CSS, Bootstrap.
 
 ##### Getting Started
-* Create database 'LibraryProject' in PostgreSQL.
-* Update database settings in settings.py, if necessary.
+* Create database in PostgreSQL.
+* Add the .env file with value(SECRET_KEY, DEBUG, DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD, HOST, REDIS_HOST)
+* Update database settings(database and cache settings) in settings.py, if necessary.
 * `$ pip install -r requirements.txt`
 * `$ python manage.py makemigrations`
 * `$ python manage.py migrate`
